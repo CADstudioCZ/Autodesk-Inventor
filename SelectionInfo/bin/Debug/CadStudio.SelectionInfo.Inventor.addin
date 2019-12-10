@@ -1,0 +1,14 @@
+<Addin Type="Standard">
+  <!--Created for Autodesk Inventor Version 24.0-->
+  <ClassId>{25119a9c-3557-4ed2-9bec-e184a99835f3}</ClassId>
+  <ClientId>{25119a9c-3557-4ed2-9bec-e184a99835f3}</ClientId>
+  <DisplayName>CAD Studio: Selection Info</DisplayName>
+  <Description>SelectionInfo Inventor Addin</Description>
+  <Assembly>SelectionInfo.dll</Assembly>
+  <LoadOnStartUp>1</LoadOnStartUp>
+  <UserUnloadable>1</UserUnloadable>
+  <Hidden>0</Hidden>
+  <SupportedSoftwareVersionGreaterThan>23..</SupportedSoftwareVersionGreaterThan>
+  <DataVersion>1</DataVersion>
+  <UserInterfaceVersion>1</UserInterfaceVersion>
+</Addin>
