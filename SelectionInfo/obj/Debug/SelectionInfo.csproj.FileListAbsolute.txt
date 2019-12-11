@@ -1,8 +1,0 @@
-D:\Dokumenty\VisualStudio2017\Projects\SelectionInfo\SelectionInfo\bin\Debug\SelectionInfo.dll
-D:\Dokumenty\VisualStudio2017\Projects\SelectionInfo\SelectionInfo\bin\Debug\SelectionInfo.pdb
-D:\Dokumenty\VisualStudio2017\Projects\SelectionInfo\SelectionInfo\bin\Debug\stdole.dll
-D:\Dokumenty\VisualStudio2017\Projects\SelectionInfo\SelectionInfo\obj\Debug\SelectionInfo.csproj.CoreCompileInputs.cache
-D:\Dokumenty\VisualStudio2017\Projects\SelectionInfo\SelectionInfo\obj\Debug\SelectionInfo.csproj.CopyComplete
-D:\Dokumenty\VisualStudio2017\Projects\SelectionInfo\SelectionInfo\obj\Debug\SelectionInfo.dll
-D:\Dokumenty\VisualStudio2017\Projects\SelectionInfo\SelectionInfo\obj\Debug\SelectionInfo.pdb
-D:\Dokumenty\VisualStudio2017\Projects\SelectionInfo\SelectionInfo\bin\Debug\CadStudio.SelectionInfo.Inventor.addin
