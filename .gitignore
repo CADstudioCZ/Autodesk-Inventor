@@ -1,0 +1,10 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/SelectionInfo/.vs
+/SelectionInfo/obj
+/SelectionInfo/SelectionInfo/.vs
+/SelectionInfo/SelectionInfo/obj
+*.pdb
+*.user
