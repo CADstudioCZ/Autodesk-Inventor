@@ -1,7 +1,7 @@
 	How to Register/Unregister 
 	=======================
 
-	1) Build Project;
+	1) Build Project (the precompiled DLL is for Inventor 2018 and higher);
 
 	2) Copy add-in dll file to one of following locations: 
 		a) Anywhere, then *.addin file <Assembly> setting should be updated to the full path including the dll name
