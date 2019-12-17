@@ -82,8 +82,10 @@
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="autodesk.inventor.interop, Version=24.1.0.0, Culture=neutral, PublicKeyToken=d84147f8b4276564, processorArchitecture=MSIL">
-      <HintPath>%TFSRoot%\Inventor\InventorInterop\R24\24-0\autodesk.inventor.interop.dll</HintPath>
+    <Reference Include="autodesk.inventor.interop, Version=22.0.0.0, Culture=neutral, PublicKeyToken=d84147f8b4276564, processorArchitecture=MSIL">
+      <HintPath>..\ref\autodesk.inventor.interop.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System">
       <Name>System</Name>
@@ -119,30 +121,6 @@
     <PreBuildEvent>
     </PreBuildEvent>
     <PostBuildEvent>
-IF $(ConfigurationName)==Debug (
-  ECHO.
-  ECHO Debug PostBuild
-    
-  REM Fake Sign assembly
-  REM "%TFSRoot%\MFG Common\BuildResources\BuildScripts\FakeSignAssembly.bat" "$(TargetPath)" "$(TargetDir)Signed\"
-  
-  REM Create DebugVersions
-  REM "%TFSRoot%\MFG Common\BuildResources\BuildScripts\CreateDebugVersions.bat" "$(TargetDir)"
-)
-
-IF $(ConfigurationName)==Release (
-  ECHO.
-  ECHO Release PostBuild
-  
-  REM Obfuscate assembly
-  REM "%TFSRoot%\MFG Common\BuildResources\BuildScripts\ObfuscateAssembly.bat" "$(TargetPath)"
-  
-  REM Sign assembly
-  REM "%TFSRoot%\MFG Common\BuildResources\BuildScripts\SignAssembly.bat" "$(TargetPath)" "$(TargetDir)Signed\"
-
-  REM Update OUT
-  REM "%TFSRoot%\MFG Common\BuildResources\BuildScripts\UpdateOut.bat" "$(TargetDir)"
-)
-	</PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
 </Project>
