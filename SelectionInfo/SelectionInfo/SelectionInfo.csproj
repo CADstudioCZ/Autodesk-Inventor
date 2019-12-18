@@ -120,8 +120,7 @@
   <PropertyGroup>
     <PreBuildEvent>
     </PreBuildEvent>
-    <PostBuildEvent>@ECHO off
-ECHO Post build
+    <PostBuildEvent>ECHO ------ Post build ------
 ECHO Zip build result
 "C:\Program Files\7-Zip\7z.exe" a "$(SolutionDir)out\$(ConfigurationName).zip" "$(TargetDir)"</PostBuildEvent>
   </PropertyGroup>
