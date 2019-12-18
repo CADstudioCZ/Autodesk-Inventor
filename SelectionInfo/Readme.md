@@ -1,0 +1,24 @@
+# Selection info
+## Èesky
+### Instalace
+Instalace se provádí zkopírováním souborù z archivu [out/Release.zip](out/Release.zip) do lokálního adresáøe. 
+
+Napøíklad:
+* Pro všechny lokální uživatele
+  * *C:\ProgramData\Autodesk\ApplicationPlugins\SelectionInfo.bundle\*
+* Pro aktuálního uživatele
+  * *C:\Users\USER_NAME\AppData\Roaming\Autodesk\ApplicationPlugins\SelectionInfo.bundle\*
+
+Poslední adresáø *SelectionInfo.bundle* neexistuje a je nutné jej vytvoøit ruènì.
+
+## English
+### Installation
+Copy files from archive [out/Release.zip](out/Release.zip) to local folder. 
+
+Example:
+* For all users
+  * *C:\ProgramData\Autodesk\ApplicationPlugins\SelectionInfo.bundle\\*
+* For current user
+  * *C:\Users\USER_NAME\AppData\Roaming\Autodesk\ApplicationPlugins\SelectionInfo.bundle\\*
+
+Last folder *SelectionInfo.bundle* doesn't exists and is necessary to create it manually.
