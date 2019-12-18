@@ -13,7 +13,7 @@ Poslední adresář *SelectionInfo.bundle* neexistuje a je nutné jej vytvořit 
 
 ## English
 ### Installation
-Copy files from archive [out/Release.zip](out/Release.zip) to local folder. 
+Copy files from the archive [out/Release.zip](out/Release.zip) to a local folder. 
 
 Example:
 * For all users
@@ -21,4 +21,4 @@ Example:
 * For current user
   * *C:\Users\USER_NAME\AppData\Roaming\Autodesk\ApplicationPlugins\SelectionInfo.bundle\\*
 
-Last folder *SelectionInfo.bundle* doesn't exists and is necessary to create it manually.
+The last folder *SelectionInfo.bundle* doesn't exist and it is necessary to create it manually.
