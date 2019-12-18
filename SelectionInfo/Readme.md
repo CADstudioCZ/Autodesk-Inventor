@@ -5,9 +5,9 @@ Instalace se provádí zkopírováním souborů z archivu [out/Release.zip](out/
 
 Například:
 * Pro všechny lokální uživatele
-  * *C:\ProgramData\Autodesk\ApplicationPlugins\SelectionInfo.bundle\*
+  * *C:\ProgramData\Autodesk\ApplicationPlugins\SelectionInfo.bundle\\*
 * Pro aktuálního uživatele
-  * *C:\Users\USER_NAME\AppData\Roaming\Autodesk\ApplicationPlugins\SelectionInfo.bundle\*
+  * *C:\Users\USER_NAME\AppData\Roaming\Autodesk\ApplicationPlugins\SelectionInfo.bundle\\*
 
 Poslední adresář *SelectionInfo.bundle* neexistuje a je nutné jej vytvořit ručně.
 
