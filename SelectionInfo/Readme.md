@@ -1,15 +1,15 @@
-# Selection info
-## Èesky
+ï»¿# Selection info
+## ÄŒesky
 ### Instalace
-Instalace se provádí zkopírováním souborù z archivu [out/Release.zip](out/Release.zip) do lokálního adresáøe. 
+Instalace se provÃ¡dÃ­ zkopÃ­rovÃ¡nÃ­m souborÅ¯ z archivu [out/Release.zip](out/Release.zip) do lokÃ¡lnÃ­ho adresÃ¡Å™e. 
 
-Napøíklad:
-* Pro všechny lokální uivatele
+NapÅ™Ã­klad:
+* Pro vÅ¡echny lokÃ¡lnÃ­ uÅ¾ivatele
   * *C:\ProgramData\Autodesk\ApplicationPlugins\SelectionInfo.bundle\*
-* Pro aktuálního uivatele
+* Pro aktuÃ¡lnÃ­ho uÅ¾ivatele
   * *C:\Users\USER_NAME\AppData\Roaming\Autodesk\ApplicationPlugins\SelectionInfo.bundle\*
 
-Poslední adresáø *SelectionInfo.bundle* neexistuje a je nutné jej vytvoøit ruènì.
+PoslednÃ­ adresÃ¡Å™ *SelectionInfo.bundle* neexistuje a je nutnÃ© jej vytvoÅ™it ruÄnÄ›.
 
 ## English
 ### Installation
