@@ -14,6 +14,7 @@ namespace SelectionInfo
     [GuidAttribute("25119a9c-3557-4ed2-9bec-e184a99835f3")]
     public class StandardAddInServer : Inventor.ApplicationAddInServer
     {
+        private ApplicationEvents applicationEvents;
         private string ClientId = "{25119A9C-3557-4ED2-9BEC-E184A99835F3}";
 
         // Inventor application object.
@@ -21,9 +22,37 @@ namespace SelectionInfo
 
         private DockableWindow selectionInfoWnd;
         private PropertyGrid selectionPropertyGrid;
+        private UserInputEvents userInputEvents;
+
 
         public StandardAddInServer()
         {
+        }
+
+        /// <summary>
+        /// Gets or sets the selected object for display properties.
+        /// </summary>
+        /// <value>
+        /// The selected object.
+        /// </value>
+        private object SelectedObject
+        {
+            get => selectionPropertyGrid?.SelectedObject;
+            set
+            {
+                if (selectionPropertyGrid != null)
+                    selectionPropertyGrid.SelectedObject = value;
+            }
+        }
+
+        private void ApplicationEvents_OnDeactivateDocument(_Document DocumentObject, EventTimingEnum BeforeOrAfter,
+            NameValueMap Context, out HandlingCodeEnum HandlingCode)
+        {
+            HandlingCode = HandlingCodeEnum.kEventNotHandled;
+            if (BeforeOrAfter != EventTimingEnum.kBefore)
+                return;
+
+            SelectedObject = null;
         }
 
         private void UserInputEvents_OnSelect(ObjectsEnumerator JustSelectedEntities,
@@ -35,7 +64,7 @@ namespace SelectionInfo
                 var selectedEntity = JustSelectedEntities[1];
                 selectedEntity = SelectionInfoSelector.GetSelectionInfo(selectedEntity);
 
-                selectionPropertyGrid.SelectedObject = selectedEntity;
+                SelectedObject = selectedEntity;
             }
         }
 
@@ -50,17 +79,23 @@ namespace SelectionInfo
             // Initialize AddIn members.
             inventor = addInSiteObject.Application;
 
-            // TODO: Add ApplicationAddInServer.Activate implementation.
-            // e.g. event initialization, command creation etc.
+            //Create dockable window
             selectionInfoWnd = inventor.UserInterfaceManager.DockableWindows.Add(ClientId,
                 "SelectionInfo.StandardAddInServer.selectionInfoWnd", "Selection");
-
-            selectionPropertyGrid = new PropertyGrid();
-            selectionInfoWnd.AddChild(selectionPropertyGrid.Handle);
-
             selectionInfoWnd.ShowVisibilityCheckBox = true;
 
-            inventor.CommandManager.UserInputEvents.OnSelect += UserInputEvents_OnSelect;
+            //Create propertyGrig control
+            selectionPropertyGrid = new PropertyGrid();
+
+            //Add propertyGrid to dockable window
+            selectionInfoWnd.AddChild(selectionPropertyGrid.Handle);
+
+            //Setup event handlers
+            userInputEvents = inventor.CommandManager.UserInputEvents;
+            userInputEvents.OnSelect += UserInputEvents_OnSelect;
+
+            applicationEvents = inventor.ApplicationEvents;
+            applicationEvents.OnDeactivateDocument += ApplicationEvents_OnDeactivateDocument;
         }
 
         public void Deactivate()
@@ -69,13 +104,18 @@ namespace SelectionInfo
             // The AddIn will be unloaded either manually by the user or
             // when the Inventor session is terminated
 
-            // TODO: Add ApplicationAddInServer.Deactivate implementation
+            //Remove event handlers
+            userInputEvents.OnSelect -= UserInputEvents_OnSelect;
+            applicationEvents.OnDeactivateDocument -= ApplicationEvents_OnDeactivateDocument;
+
+            //Cleanup selectionPropertyGrid
+            SelectedObject = null;
+            selectionPropertyGrid = null;
 
             // Release objects.
+            applicationEvents = null;
+            userInputEvents = null;
             inventor = null;
-
-            selectionPropertyGrid.SelectedObject = null;
-            selectionPropertyGrid = null;
 
             GC.Collect();
             GC.WaitForPendingFinalizers();

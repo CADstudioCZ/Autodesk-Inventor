@@ -9,3 +9,4 @@
 *.pdb
 *.user
 /.vs
+/SelectionInfo/SelectionInfo/bin/Debug
