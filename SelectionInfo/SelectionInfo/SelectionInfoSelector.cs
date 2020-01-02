@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel;
 using Inventor;
 
@@ -54,8 +55,11 @@ namespace SelectionInfo
         /// The display name.
         /// </value>
         [Category("Occurrence")]
-        public string DisplayName { get => occurrence.Name; set => occurrence.Name = value; }
-
+        public string DisplayName
+        {
+            get => occurrence.Name;
+            set => occurrence.Name = value;
+        }
     }
 
 
@@ -64,13 +68,15 @@ namespace SelectionInfo
     /// </summary>
     class DocumentInfo
     {
+        private readonly Document document;
+        protected string DesignTrackingProperties = "{32853F0F-3444-11D1-9E93-0060B03C1CA6}";
+
+        protected string InventorDocumentSummaryInformation = "{D5CDD502-2E9C-101B-9397-08002B2CF9AE}";
+
         //PropertySet internal names
         protected string InventorSummaryInformation = "{F29F85E0-4FF9-1068-AB91-08002B27B3D9}";
-        protected string InventorDocumentSummaryInformation = "{D5CDD502-2E9C-101B-9397-08002B2CF9AE}";
-        protected string DesignTrackingProperties = "{32853F0F-3444-11D1-9E93-0060B03C1CA6}";
         protected string InventorUserDefinedProperties = "{D5CDD505-2E9C-101B-9397-08002B2CF9AE}";
-
-        private readonly Document document;
+        private DocumentiProperties iProperties;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DocumentInfo"/> class.
@@ -79,6 +85,7 @@ namespace SelectionInfo
         public DocumentInfo(Document document)
         {
             this.document = document;
+            iProperties = new DocumentiProperties(document);
         }
 
         /// <summary>
@@ -128,6 +135,13 @@ namespace SelectionInfo
             set => document.PropertySets[DesignTrackingProperties]["Part Number"].Value =
                 value ?? "";
         }
+
+        public object Title => iProperties.Title;
+        //public DateTime CreationTime
+        //{
+        //    get { return iProperties.CreationTime; }
+        //    set { iProperties.CreationTime = value; }
+        //}
 
         /// <summary>
         /// Gets the mass properties for part or assembly document.
