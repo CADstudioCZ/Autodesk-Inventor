@@ -9,7 +9,9 @@ With this add-in you can immediately show preset document properties (like Part 
 
 You can modify the C# file <i>SelectionInfoSelector.cs</i> to include any other iProperties you want to display in the Selection palette. Then use MS Visual Studio to recompile the application. You can also just install the precompiled DLL for Inventor 2018 and higher.
 
- <b>Installation</b>
+<b>Installation</b>
  - see <a href="SelectionInfo/SelectionInfo/Readme.txt">Readme.txt</a>
+<b>Customization</b>
+ - see <a href="SelectionInfo/Readme.md">Readme.md</a>
 
 Contact CAD Studio at <a href="https://www.cadstudio.cz">www.cadstudio.cz</a> or <a href="https://www.cadforum.cz">www.cadforum.cz</a> or Facebook: <a href="https://www.facebook.com/CADstudio">@CADstudio</a> for more information.
