@@ -67,7 +67,7 @@ namespace SelectionInfo
 
         public double Cost
         {
-            get => (double) CostProperty.Value;
+            get => (double)CostProperty.Value;
             set => CostProperty.Value = value;
         }
 
@@ -79,13 +79,13 @@ namespace SelectionInfo
 
         public DateTime CreationTime
         {
-            get => (DateTime) CreationTimeProperty.Value;
+            get => (DateTime)CreationTimeProperty.Value;
             set => CreationTimeProperty.Value = value;
         }
 
         public DateTime DateChecked
         {
-            get => (DateTime) DateCheckedProperty.Value;
+            get => (DateTime)DateCheckedProperty.Value;
             set => DateCheckedProperty.Value = value;
         }
 
@@ -145,7 +145,7 @@ namespace SelectionInfo
 
         public DateTime EngrDateApproved
         {
-            get => (DateTime) EngrDateApprovedProperty.Value;
+            get => (DateTime)EngrDateApprovedProperty.Value;
             set => EngrDateApprovedProperty.Value = value;
         }
 
@@ -235,7 +235,7 @@ namespace SelectionInfo
 
         public DateTime MfgDateApproved
         {
-            get => (DateTime) MfgDateApprovedProperty.Value;
+            get => (DateTime)MfgDateApprovedProperty.Value;
             set => MfgDateApprovedProperty.Value = value;
         }
 
@@ -390,7 +390,17 @@ namespace SelectionInfo
         /// <returns>Gets value of the user defined iProperty with given name.</returns>
         public object UserDefined(string name)
         {
-            return document.PropertySets[InventorUserDefinedProperties][name].Value;
+            Property userDefinedProperty;
+
+            try
+            {
+                userDefinedProperty = document.PropertySets[InventorUserDefinedProperties][name];
+            }
+            catch
+            {
+                return "*** Not found ***";
+            }
+            return userDefinedProperty.Value;
         }
 
         /// <summary>
