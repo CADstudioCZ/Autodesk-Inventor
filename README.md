@@ -11,6 +11,7 @@ You can modify the C# file <i>SelectionInfoSelector.cs</i> to include any other 
 
 <b>Installation</b>
  - see <a href="SelectionInfo/SelectionInfo/Readme.txt">Readme.txt</a>
+ 
 <b>Customization</b>
  - see <a href="SelectionInfo/Readme.md">Readme.md</a>
 
