@@ -40,13 +40,13 @@ Tato třída zajišťuje přístup k fyzikálním vlastnostem daného CAD dokume
 Jako vstupní argument je vyžadován dokument součásti nebo sestavy. Pro jiné typy dokumentů nevrací žádné hodnoty.
 
 ##### `Area(string units)`
-Metoda `Area` vrací celkovou plochu modelu. Jako argument `units` je možné zadat měrnou (plošnou) jednotku, ve které je požadován výstup. Nejčastěji je to řetězec určující jednotku stejně, jako je tomu v parametrech, například "m^2" nebo "m*m" pro výstup v metrech čtverečních. Pokud není jednotka definována, vrací se výsledek ve výchozích jednotkách Inventoru, což jsou cm^2.
+Metoda `Area` vrací celkovou plochu modelu. Jako argument `units` je možné zadat měrnou (plošnou) jednotku, ve které je požadován výstup. Nejčastěji je to řetězec určující jednotku stejně, jako je tomu v parametrech, například "m^2" nebo "m&ast;m" pro výstup v metrech čtverečních. Pokud není jednotka definována, vrací se výsledek ve výchozích jednotkách Inventoru, což jsou cm^2.
 
 ##### `Mass(string units)`
 Metoda `Mass` vrací celkovou hmotnost modelu. Jako argument `units` je možné zadat měrnou (váhovou) jednotku, ve které je požadován výstup. Nejčastěji je to řetězec určující jednotku stejně, jako je tomu v parametrech, například "g" nebo "lb" pro výstup v gramech nebo librách. Pokud není jednotka definována, vrací se výsledek ve výchozích jednotkách Inventoru, což jsou kg.
 
 ##### `Volume(string units)`
-Metoda `Volume` vrací celkový objem modelu. Jako argument `units` je možné zadat měrnou (objemovou) jednotku, ve které je požadován výstup. Nejčastěji je to řetězec určující jednotku stejně, jako je tomu v parametrech, například "m^3" nebo "m*m*m" pro výstup v metrech krychlových. Pokud není jednotka definována, vrací se výsledek ve výchozích jednotkách Inventoru, což jsou cm^3.
+Metoda `Volume` vrací celkový objem modelu. Jako argument `units` je možné zadat měrnou (objemovou) jednotku, ve které je požadován výstup. Nejčastěji je to řetězec určující jednotku stejně, jako je tomu v parametrech, například "m^3" nebo "m&ast;m&ast;m" pro výstup v metrech krychlových. Pokud není jednotka definována, vrací se výsledek ve výchozích jednotkách Inventoru, což jsou cm^3.
 
 #### [DocumentInfo.cs](SelectionInfo/DocumentInfo.cs)
 Tato třída definuje vlastnosti, které budou zobrazeny, pokud je vybraný objekt dokument, nebo je na dokument převoditelný. Například výskyt dokumentu v sestavě.
@@ -209,13 +209,13 @@ This class ensures access to physical properties of the given CAD document.
 As an input argument, the part or assembly document is required. No values are returned for other document types.
 
 ##### `Area(string units)`
-The method `Area` returns the total area of the model. As the argument `units`, you can specify an area measurement unit which should be used for the output. Usually, this is a string defining the unit in the same way as in Inventor parameters, e.g. "m^2" or "m*m" for output in square meters. If no unit is defined, the output is returned in the default Inventor units which is cm^2.
+The method `Area` returns the total area of the model. As the argument `units`, you can specify an area measurement unit which should be used for the output. Usually, this is a string defining the unit in the same way as in Inventor parameters, e.g. "m^2" or "m&ast;m" for output in square meters. If no unit is defined, the output is returned in the default Inventor units which is cm^2.
 
 ##### `Mass(string units)`
 The method `Mass` returns the total mass of the model. As the argument `units`, you can specify a mass measurement unit which should be used for the output. Usually, this is a string defining the unit in the same way as in Inventor parameters, e.g. "g" or "lb" for output in grams or pounds. If no unit is defined, the output is returned in the default Inventor units which is kg.
 
 ##### `Volume(string units)`
-The method `Volume` returns the total volume of the model. As the argument `units`, you can specify a volume area measurement unit which should be used for the output. Usually, this is a string defining the unit in the same way as in Inventor parameters, e.g. "m^3" or "m*m*m" for output in cubic meters. If no unit is defined, the output is returned in the default Inventor units which is cm^3.
+The method `Volume` returns the total volume of the model. As the argument `units`, you can specify a volume area measurement unit which should be used for the output. Usually, this is a string defining the unit in the same way as in Inventor parameters, e.g. "m^3" or "m&ast;m&ast;m" for output in cubic meters. If no unit is defined, the output is returned in the default Inventor units which is cm^3.
 
 #### [DocumentInfo.cs](SelectionInfo/DocumentInfo.cs)
 This class defines properties, which will be displayed, if the selected object is a document, or is convertible to a document. E.g. a document occurence in an assembly.
