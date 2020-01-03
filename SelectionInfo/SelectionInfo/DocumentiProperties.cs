@@ -3,14 +3,21 @@ using Inventor;
 
 namespace SelectionInfo
 {
+    /// <summary>
+    /// Provides access to standard iProperties in the inventor document.
+    /// </summary>
     class DocumentiProperties
     {
         public const string InventorSummaryInformation = "{F29F85E0-4FF9-1068-AB91-08002B27B3D9}";
         public const string InventorDocumentSummaryInformation = "{D5CDD502-2E9C-101B-9397-08002B2CF9AE}";
         public const string DesignTrackingProperties = "{32853F0F-3444-11D1-9E93-0060B03C1CA6}";
         public const string InventorUserDefinedProperties = "{D5CDD505-2E9C-101B-9397-08002B2CF9AE}";
-        private Document document;
+        private readonly Document document;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DocumentiProperties"/> class.
+        /// </summary>
+        /// <param name="document">The document.</param>
         public DocumentiProperties(Document document)
         {
             this.document = document;
@@ -60,7 +67,7 @@ namespace SelectionInfo
 
         public double Cost
         {
-            get => (double)CostProperty.Value;
+            get => (double) CostProperty.Value;
             set => CostProperty.Value = value;
         }
 
@@ -72,13 +79,13 @@ namespace SelectionInfo
 
         public DateTime CreationTime
         {
-            get => (DateTime)CreationTimeProperty.Value;
+            get => (DateTime) CreationTimeProperty.Value;
             set => CreationTimeProperty.Value = value;
         }
 
         public DateTime DateChecked
         {
-            get => (DateTime)DateCheckedProperty.Value;
+            get => (DateTime) DateCheckedProperty.Value;
             set => DateCheckedProperty.Value = value;
         }
 
@@ -138,7 +145,7 @@ namespace SelectionInfo
 
         public DateTime EngrDateApproved
         {
-            get => (DateTime)EngrDateApprovedProperty.Value;
+            get => (DateTime) EngrDateApprovedProperty.Value;
             set => EngrDateApprovedProperty.Value = value;
         }
 
@@ -228,7 +235,7 @@ namespace SelectionInfo
 
         public DateTime MfgDateApproved
         {
-            get => (DateTime)MfgDateApprovedProperty.Value;
+            get => (DateTime) MfgDateApprovedProperty.Value;
             set => MfgDateApprovedProperty.Value = value;
         }
 
@@ -374,6 +381,26 @@ namespace SelectionInfo
         {
             get => WeldMaterialProperty.Value.ToString();
             //set => WeldMaterialProperty.Value = value;
+        }
+
+        /// <summary>
+        /// Gets value of the user defined iProperty with given name.
+        /// </summary>
+        /// <param name="name">The iProperty name.</param>
+        /// <returns>Gets value of the user defined iProperty with given name.</returns>
+        public object UserDefined(string name)
+        {
+            return document.PropertySets[InventorUserDefinedProperties][name].Value;
+        }
+
+        /// <summary>
+        /// Sets value of the user defined iProperty with given name.
+        /// </summary>
+        /// <param name="name">The iProperty name.</param>
+        /// <param name="value">The iProperty value.</param>
+        public void UserDefined(string name, object value)
+        {
+            document.PropertySets[InventorUserDefinedProperties][name].Value = value;
         }
 
 

@@ -96,7 +96,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DocumentInfo.cs" />
     <Compile Include="DocumentiProperties.cs" />
+    <Compile Include="OccurrenceInfo.cs" />
+    <Compile Include="PhysicalProperties.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
