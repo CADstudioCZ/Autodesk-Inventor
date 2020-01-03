@@ -18,13 +18,13 @@ Pokud chcete během kompilace vytvářet archiv se všemi potřebnými soubory A
 Jako cílová platforma se používá Inventor 2017 a novější a .NET Framework 4.7. Pokud potřebujete provést kompilaci pro starší verzi Inventoru, ja potřeba upravit referenci na Autodes.Inventor.Interop příslušné verze. Zpětná kompatibilita ale není zaručena.
 
 ### Základní struktura kódu
-#### [StandardAddInServer.cs](SelectionInfo/SelectionInfo/StandardAddInServer.cs)
+#### [StandardAddInServer.cs](SelectionInfo/StandardAddInServer.cs)
 Základní třída pro zevedení AddInu do Inventoru. Obsahuje definice základních objektů a obsluhuje obecné chování při spuštění, za běhu a při ukončování.
 
-#### [SelectionInfoSelector.cs](SelectionInfo/SelectionInfo/SelectionInfoSelector.cs)
+#### [SelectionInfoSelector.cs](SelectionInfo/SelectionInfoSelector.cs)
 Tato třída je zodpovědná za rozhodování, jaká data budou zobrazena pro vybraný objekt. Pokud pro vybraný objekt není definován žádný popis, vrací `null` a v okně se nic nezobrazí.
 
-#### [DocumentiProperties.cs](SelectionInfo/SelectionInfo/DocumentiProperties.cs)
+#### [DocumentiProperties.cs](SelectionInfo/DocumentiProperties.cs)
 Tato třída zajišťuje přístup k iVlastnostem dokumentu. Obsahuje přímý přístup ke standardním iVlastnostem, které je možné přímo zobrazit. U těchto iVlastností je určen i datový typ. Některé iVlastnosti jsou definovány jak pro čtení, tak pro zápis a některé jsou určny pouze pro čtení. 
 
 Dále obsahuje dvě metody, které slouží pro přístup k uživatelským iVlastnostem.
@@ -34,7 +34,7 @@ Tato metoda vrací hodnotu uživatelské iVlastnosti definované jejím názvem.
 #### `UserDefined(string name, object value)`
 Tato metoda nastavuje hodnotu uživatelské iVlastnosti definované jejím názvem na hodnotu argumentu `value`. Pokud taková iVlastnost neexistuje, není možné hodnotu nastavit, ani se vlastnost nevytvoří. 
 
-#### [PhysicalProperties.cs](SelectionInfo/SelectionInfo/PhysicalProperties.cs) 
+#### [PhysicalProperties.cs](SelectionInfo/PhysicalProperties.cs) 
 Tato třída zajišťuje přístup k fyzikálním vlastnostem dokumentu.
 Jako vstupní argumet je vyžadován dokument součásti nebo sestavy. Pro jiné typy dokumentů nevrací žádné hodnoty.
 
@@ -47,11 +47,11 @@ Metoda `Mass` vrací celkovou hmotnost modelu. Jako argument `units` je možné 
 ##### `Volume(string units)`
 Metoda `Volume` vrací celkový objem modelu. Jako argument `units` je možné zadat jednotku ve které je požadován výstup. Nejčastějí je to řetězec určující jednotku stejně, jako je tomu v parametrech. například "m^3" nebo "m*m*m" pro výstup v metrech krychlových. Pokud není jednotka definována, varcí se výsledek ve výchozích jednotkách Inventoru což jsou cm^3.
 
-#### [DocumentInfo.cs](SelectionInfo/SelectionInfo/DocumentInfo.cs)
+#### [DocumentInfo.cs](SelectionInfo/DocumentInfo.cs)
 Tato třída definuje vlastnosti, které budou zobrazeny, pokud je vybraný objekt dokument, nebo je na dokument převoditelný. Například výskyt dokumentu v sestavě.
 
-#### [OccurrenceInfo.cs](SelectionInfo/SelectionInfo/OccurrenceInfo.cs)
-Tato třída definuje vlastnosti, které se budou zobrazovat, pokud je vybraný objekt výskyt dokumentu v sestavě. Zobrazuje všechny informace, které jsou definovány v [DocumentInfo.cs](SelectionInfo/SelectionInfo/DocumentInfo.cs) a doplňuje další, které jsou specifické pro výskyt. Například `DisplayName` což je název výskytu ve stromě sestavy.
+#### [OccurrenceInfo.cs](SelectionInfo/OccurrenceInfo.cs)
+Tato třída definuje vlastnosti, které se budou zobrazovat, pokud je vybraný objekt výskyt dokumentu v sestavě. Zobrazuje všechny informace, které jsou definovány v [DocumentInfo.cs](SelectionInfo/DocumentInfo.cs) a doplňuje další, které jsou specifické pro výskyt. Například `DisplayName` což je název výskytu ve stromě sestavy.
 
 ## Příklady kódu
 ### Doplnění dalšího objektu pro zobrazení informací
@@ -59,7 +59,7 @@ V tomto příkladu je ukázáno, jak je možné stávající kód rozšířit na
 
 1. Vytvoření třídy pro popis výkresového pohledu
 
->Třídu vytvořte jako samostatný soubor, například DrawingViewInfo.cs. Do tohoto souboru vytvořte kód podle následujícího příkladu. V další fázi můžete kód upravit podle svého uvážení a potřeby.
+>Třídu vytvořte jako samostatný soubor, například *DrawingViewInfo.cs*. Do tohoto souboru vytvořte kód podle následujícího příkladu. V další fázi můžete kód upravit podle svého uvážení a potřeby.
 
 ```csharp
   class DrawingViewInfo
@@ -101,7 +101,7 @@ V tomto příkladu je ukázáno, jak je možné stávající kód rozšířit na
 
 2. Rozšíření seznamu použitelných objektů
 
->V souboru [SelectionInfoSelector.cs](SelectionInfo/SelectionInfo/SelectionInfoSelector.cs) upravte metodu `GetSelectionInfo` podle následujícího příkladu.
+>V souboru [SelectionInfoSelector.cs](SelectionInfo/SelectionInfoSelector.cs) upravte metodu `GetSelectionInfo` podle následujícího příkladu.
 
 ```csharp
 public static object GetSelectionInfo(object selectedEntity)
