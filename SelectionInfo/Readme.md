@@ -1,4 +1,4 @@
-﻿# Selection info
+﻿# Selection info - install+customization
 ## Česky
 ### Instalace
 Instalace se provádí zkopírováním souborů z archivu [out/Release.zip](out/Release.zip) do lokálního adresáře. 
@@ -12,12 +12,12 @@ Například:
 Poslední adresář *SelectionInfo.bundle* neexistuje a je nutné jej vytvořit ručně.
 
 ### Kompilace
-Pro kompilaci lze použít [Visual studio 2017](https://visualstudio.microsoft.com/cs/downloads/) nebo novější. Lze použít i Comunity Edition, která je zdarma. 
+Pro kompilaci lze použít [Visual studio 2017](https://visualstudio.microsoft.com/cs/downloads/) nebo novější. Lze použít i verzi Community Edition, která je zdarma. 
 Pokud chcete během kompilace vytvářet archiv se všemi potřebnými soubory AddInu, je potřeba mít nainstalovaný i [7-Zip](https://www.7-zip.org/download.html).
 
-Jako cílová platforma se používá Inventor 2017 a novější a .NET Framework 4.7. Pokud potřebujete provést kompilaci pro starší verzi Inventoru, ja potřeba upravit referenci na Autodes.Inventor.Interop příslušné verze. Zpětná kompatibilita ale není zaručena.
+Jako cílová platforma se používá Inventor 2017 či novější a knihovny .NET Framework 4.7. Pokud potřebujete provést kompilaci pro starší verzi Inventoru, je potřeba upravit referenci na Autodesk.Inventor.Interop příslušné verze. Zpětná kompatibilita ale není zaručena.
 
-### Základní struktura kódu
+### Základní struktura zdrojového kódu
 #### [StandardAddInServer.cs](SelectionInfo/StandardAddInServer.cs)
 Základní třída pro zevedení AddInu do Inventoru. Obsahuje definice základních objektů a obsluhuje obecné chování při spuštění, za běhu a při ukončování.
 
@@ -25,7 +25,7 @@ Základní třída pro zevedení AddInu do Inventoru. Obsahuje definice základn
 Tato třída je zodpovědná za rozhodování, jaká data budou zobrazena pro vybraný objekt. Pokud pro vybraný objekt není definován žádný popis, vrací `null` a v okně se nic nezobrazí.
 
 #### [DocumentiProperties.cs](SelectionInfo/DocumentiProperties.cs)
-Tato třída zajišťuje přístup k iVlastnostem dokumentu. Obsahuje přímý přístup ke standardním iVlastnostem, které je možné přímo zobrazit. U těchto iVlastností je určen i datový typ. Některé iVlastnosti jsou definovány jak pro čtení, tak pro zápis a některé jsou určny pouze pro čtení. 
+Tato třída zajišťuje přístup k iVlastnostem dokumentu. Obsahuje přímý přístup ke standardním iVlastnostem, které je možné přímo zobrazit. U těchto iVlastností je určen i datový typ. Některé iVlastnosti jsou definovány jak pro čtení, tak pro zápis a některé jsou určeny pouze pro čtení. 
 
 Dále obsahuje dvě metody, které slouží pro přístup k uživatelským iVlastnostem.
 #### `UserDefined(string name)`
@@ -35,23 +35,23 @@ Tato metoda vrací hodnotu uživatelské iVlastnosti definované jejím názvem.
 Tato metoda nastavuje hodnotu uživatelské iVlastnosti definované jejím názvem na hodnotu argumentu `value`. Pokud taková iVlastnost neexistuje, není možné hodnotu nastavit, ani se vlastnost nevytvoří. 
 
 #### [PhysicalProperties.cs](SelectionInfo/PhysicalProperties.cs) 
-Tato třída zajišťuje přístup k fyzikálním vlastnostem dokumentu.
-Jako vstupní argumet je vyžadován dokument součásti nebo sestavy. Pro jiné typy dokumentů nevrací žádné hodnoty.
+Tato třída zajišťuje přístup k fyzikálním vlastnostem daného CAD dokumentu.
+Jako vstupní argument je vyžadován dokument součásti nebo sestavy. Pro jiné typy dokumentů nevrací žádné hodnoty.
 
 ##### `Area(string units)`
-Metoda `Area` vrací celkovou plochu modelu. Jako argument `units` je možné zadat jednotku ve které je požadován výstup. Nejčastějí je to řetězec určující jednotku stejně, jako je tomu v parametrech. například "m^2" nebo "m*m" pro výstup v metrech čtverečních. Pokud není jednotka definována, varcí se výsledek ve výchozích jednotkách Inventoru což jsou cm^2.
+Metoda `Area` vrací celkovou plochu modelu. Jako argument `units` je možné zadat měrnou (plošnou) jednotku, ve které je požadován výstup. Nejčastěji je to řetězec určující jednotku stejně, jako je tomu v parametrech, například "m^2" nebo "m*m" pro výstup v metrech čtverečních. Pokud není jednotka definována, vrací se výsledek ve výchozích jednotkách Inventoru, což jsou cm^2.
 
 ##### `Mass(string units)`
-Metoda `Mass` vrací celkovou hmotnost modelu. Jako argument `units` je možné zadat jednotku ve které je požadován výstup. Nejčastějí je to řetězec určující jednotku stejně, jako je tomu v parametrech. například "g" nebo "lb" pro výstup v gramech nebo librách. Pokud není jednotka definována, varcí se výsledek ve výchozích jednotkách Inventoru což jsou kg.
+Metoda `Mass` vrací celkovou hmotnost modelu. Jako argument `units` je možné zadat měrnou (váhovou) jednotku, ve které je požadován výstup. Nejčastěji je to řetězec určující jednotku stejně, jako je tomu v parametrech, například "g" nebo "lb" pro výstup v gramech nebo librách. Pokud není jednotka definována, vrací se výsledek ve výchozích jednotkách Inventoru, což jsou kg.
 
 ##### `Volume(string units)`
-Metoda `Volume` vrací celkový objem modelu. Jako argument `units` je možné zadat jednotku ve které je požadován výstup. Nejčastějí je to řetězec určující jednotku stejně, jako je tomu v parametrech. například "m^3" nebo "m*m*m" pro výstup v metrech krychlových. Pokud není jednotka definována, varcí se výsledek ve výchozích jednotkách Inventoru což jsou cm^3.
+Metoda `Volume` vrací celkový objem modelu. Jako argument `units` je možné zadat měrnou (objemovou) jednotku, ve které je požadován výstup. Nejčastěji je to řetězec určující jednotku stejně, jako je tomu v parametrech, například "m^3" nebo "m*m*m" pro výstup v metrech krychlových. Pokud není jednotka definována, vrací se výsledek ve výchozích jednotkách Inventoru, což jsou cm^3.
 
 #### [DocumentInfo.cs](SelectionInfo/DocumentInfo.cs)
 Tato třída definuje vlastnosti, které budou zobrazeny, pokud je vybraný objekt dokument, nebo je na dokument převoditelný. Například výskyt dokumentu v sestavě.
 
 #### [OccurrenceInfo.cs](SelectionInfo/OccurrenceInfo.cs)
-Tato třída definuje vlastnosti, které se budou zobrazovat, pokud je vybraný objekt výskyt dokumentu v sestavě. Zobrazuje všechny informace, které jsou definovány v [DocumentInfo.cs](SelectionInfo/DocumentInfo.cs) a doplňuje další, které jsou specifické pro výskyt. Například `DisplayName` což je název výskytu ve stromě sestavy.
+Tato třída definuje vlastnosti, které se budou zobrazovat, pokud je vybraný objekt výskyt dokumentu v sestavě. Zobrazuje všechny informace, které jsou definovány v [DocumentInfo.cs](SelectionInfo/DocumentInfo.cs) a doplňuje další, které jsou specifické pro výskyt. Například `DisplayName`, což je název výskytu ve stromě sestavy.
 
 ## Příklady kódu
 ### Doplnění dalšího objektu pro zobrazení informací
@@ -162,6 +162,8 @@ Náhled:
 
 >**Poznámka:** Použitelných atributů je celá řada a zdaleka tu nejsou uvedeny všechny. 
 
+
+-----------------------------------------------------------------------------------------------
 
 
 ## English
