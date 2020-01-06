@@ -45,10 +45,10 @@ This class ensures access to the document's iProperties. It contains direct acce
 
 Furthermore it contains two methods, which can be used to access custom iProperties.
 
-### `UserDefined(string name)`
+#### `UserDefined(string name)`
 This method returns the value of the custom iProperty defined by its name. If no such iProperty exists, an error message os displayed.
 
-### `UserDefined(string name, object value)`
+#### `UserDefined(string name, object value)`
 This method sets the value of the custom iProperty defined by its name to the value of the argument `value`. If no such iProperty exists, it is neither possible to set the value, nor is the property created. 
 
 ### [PhysicalProperties.cs](SelectionInfo/PhysicalProperties.cs) 
