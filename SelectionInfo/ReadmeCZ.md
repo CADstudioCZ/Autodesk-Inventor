@@ -46,10 +46,10 @@ Tato třída zajišťuje přístup k iVlastnostem dokumentu. Obsahuje přímý p
 
 Dále obsahuje dvě metody, které slouží pro přístup k uživatelským iVlastnostem.
 
-### `UserDefined(string name)`
+#### `UserDefined(string name)`
 Tato metoda vrací hodnotu uživatelské iVlastnosti definované jejím názvem. Pokud taková iVlastnost neexistuje, je zobrazeno chybové hlášení.
 
-### `UserDefined(string name, object value)`
+#### `UserDefined(string name, object value)`
 Tato metoda nastavuje hodnotu uživatelské iVlastnosti definované jejím názvem na hodnotu argumentu `value`. Pokud taková iVlastnost neexistuje, není možné hodnotu nastavit, ani se vlastnost nevytvoří. 
 
 ### [PhysicalProperties.cs](SelectionInfo/PhysicalProperties.cs) 
