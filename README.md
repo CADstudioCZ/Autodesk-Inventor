@@ -2,7 +2,7 @@
 
 <b>Tools for Autodesk Inventor</b>
 
-<b>SelectionInfo</b> is a sample add-in application for Autodesk Inventor by CAD Studio; it displays an iProperties Palette as a modeless, dockable UI element in Inventor. This pallette displays document iProperties (e.g. Part Number, Mass, Area, etc) of any user selected component. The user can select the component in either the window or in the browser tree. You can change, add, or remove which iProperties are shown in the Pallette by editing the <i>SelectionInfoSelector.cs</i> file.
+<b>SelectionInfo</b> is a sample add-in application for Autodesk Inventor by CAD Studio; it displays an iProperties palette as a modeless, dockable UI element in Inventor. This palette displays document iProperties (e.g. Part Number, Mass, Area, etc) of any user selected component. The user can select the component in either the window or in the browser tree. You can change, add, or remove which iProperties are shown in the pallete by editing the <i>SelectionInfoSelector.cs</i> file.
 
 <img src="SelectionInfo/SelectionIP.gif">
 
