@@ -8,7 +8,7 @@
 
 
 <b>Installation</b>
- - Refer to <a href="SelectionInfo/SelectionInfo/Readme.txt">Readme.txt</a> for installation instructions.
+ - Refer to <a href="SelectionInfo/SelectionInfo/install.txt">install.txt</a> for installation instructions.
 - A precompiled DLL of the base add-in is included (Inventor 2018 or higher) <a href="Autodesk-Inventor/SelectionInfo/SelectionInfo/bin/Release">here</a>.
  
 <b>Customization</b>
