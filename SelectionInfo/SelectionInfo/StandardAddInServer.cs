@@ -126,6 +126,7 @@ namespace SelectionInfo
         /// <summary>
         ///Handle when the current document is deactivated [closed].
         /// </summary>
+
         private void ApplicationEvents_OnDeactivateDocument(_Document DocumentObject, EventTimingEnum BeforeOrAfter,
             NameValueMap Context, out HandlingCodeEnum HandlingCode)
         {
@@ -137,9 +138,17 @@ namespace SelectionInfo
         }
 
 
+
+
         /// <summary>
         /// Handle user-selections, choose best course based on how many objects are selected.
         /// </summary>
+        /// <param name="JustSelectedEntities"></param>
+        /// <param name="MoreSelectedEntities"></param>
+        /// <param name="SelectionDevice"></param>
+        /// <param name="ModelPosition"></param>
+        /// <param name="ViewPosition"></param>
+        /// <param name="View"></param>
         private void UserInputEvents_OnSelect(ObjectsEnumerator JustSelectedEntities,
             ref ObjectCollection MoreSelectedEntities, SelectionDeviceEnum SelectionDevice, Point ModelPosition,
             Point2d ViewPosition, Inventor.View View)
