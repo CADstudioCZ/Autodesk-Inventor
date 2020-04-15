@@ -4,7 +4,7 @@ using Inventor;
 namespace SelectionInfo
 {
     /// <summary>
-    /// This clas contains informations about Document
+    /// This class contains information about Document
     /// </summary>
     class DocumentInfo
     {
@@ -15,7 +15,7 @@ namespace SelectionInfo
         /// <summary>
         /// Initializes a new instance of the <see cref="DocumentInfo"/> class.
         /// </summary>
-        /// <param name="document">The document.</param>
+        /// <param name="document">An Inventor.Document object.</param>
         public DocumentInfo(Document document)
         {
             this.document = document;

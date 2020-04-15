@@ -4,7 +4,7 @@ using Inventor;
 namespace SelectionInfo
 {
     /// <summary>
-    /// Provides informations about physical properties of parts and assemblies
+    /// Provides information about the physical properties of parts and assemblies.
     /// </summary>
     class PhysicalProperties
     {
@@ -15,7 +15,7 @@ namespace SelectionInfo
         /// <summary>
         /// Initializes a new instance of the <see cref="PhysicalProperties"/> class.
         /// </summary>
-        /// <param name="document">The document. Expected is PartDocument or AssemblyDocument.</param>
+        /// <param name="document">An Inventor.PartDocument or Inventor.AssemblyDocument object.</param>
         public PhysicalProperties(Document document)
         {
             this.document = document;
@@ -23,10 +23,10 @@ namespace SelectionInfo
         }
 
         /// <summary>
-        /// Returns area of the model.
+        /// Returns area of the model in the document.
         /// </summary>
-        /// <param name="units">The area units. Can be string like "m^2", "mm*mm", etc. If not specified, database units [cm^2] is used.</param>
-        /// <returns>Returns area of the model.</returns>
+        /// <param name="units">The area units as a string (e.g."m^2", "mm*mm", etc). If not specified, database units [cm^2] are used.</param>
+        /// <returns>Returns area of the model in the document.</returns>
         public double Area(object units = null)
         {
             double area = MassProperties(document)?.Area ?? double.NaN;
@@ -34,10 +34,10 @@ namespace SelectionInfo
         }
 
         /// <summary>
-        /// Returns mass of the model.
+        /// Returns mass of the model in the document.
         /// </summary>
-        /// <param name="units">The mass units. Can be string like "kg", "lb", etc. Or member of UnitsTypeEnum. If not specified, database units [g] is used.</param>
-        /// <returns>Returns mass of the model.</returns>
+        /// <param name="units">The mass units as a UnitsTypeEnum or a string (e.g. "kg", "lbmass", etc.). If not specified, database units [g] are used.</param>
+        /// <returns>Returns mass of the model in the document</returns>
         public double Mass(object units = null)
         {
             double mass = MassProperties(document)?.Mass ?? double.NaN;
@@ -47,10 +47,10 @@ namespace SelectionInfo
         }
 
         /// <summary>
-        /// Returns volume of the model.
+        /// Returns volume of the model in the document.
         /// </summary>
-        /// <param name="units">The volume units. Can be string like "m^3", "mm*mm*mm", etc. If not specified, database units [cm^3] is used.</param>
-        /// <returns>Returns volume of the model.</returns>
+        /// <param name="units">The volume units as a string (e.g. "m^3", "mm*mm*mm", etc). If not specified, database units [cm^3] are used.</param>
+        /// <returns>Returns volume of the model in the document.</returns>
         public double Volume(object units = null)
         {
             double volume = MassProperties(document)?.Volume ?? double.NaN;
@@ -60,7 +60,7 @@ namespace SelectionInfo
         /// <summary>
         /// Gets the mass properties for part or assembly document.
         /// </summary>
-        /// <param name="document">The document.</param>
+        /// <param name="document">A PartDocument or AssemblyDocument object.</param>
         /// <returns>Returns MassProperties for PartDocument os AssemblyDocument. Otherwise returns null.</returns>
         private static MassProperties MassProperties(Document document)
         {

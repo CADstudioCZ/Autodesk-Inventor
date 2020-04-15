@@ -4,7 +4,7 @@ using Inventor;
 namespace SelectionInfo
 {
     /// <summary>
-    /// Provides access to standard iProperties in the inventor document.
+    /// Provides access to typical iProperties in an Inventor document.
     /// </summary>
     class DocumentiProperties
     {
@@ -17,7 +17,7 @@ namespace SelectionInfo
         /// <summary>
         /// Initializes a new instance of the <see cref="DocumentiProperties"/> class.
         /// </summary>
-        /// <param name="document">The document.</param>
+        /// <param name="document">An Inventor.document object.</param>
         public DocumentiProperties(Document document)
         {
             this.document = document;
@@ -384,9 +384,9 @@ namespace SelectionInfo
         }
 
         /// <summary>
-        /// Gets value of the user defined iProperty with given name.
+        /// Gets the value of a user defined iProperty.
         /// </summary>
-        /// <param name="name">The iProperty name.</param>
+        /// <param name="name">The user defined iProperty name.</param>
         /// <returns>Gets value of the user defined iProperty with given name.</returns>
         public object UserDefined(string name)
         {
@@ -404,9 +404,9 @@ namespace SelectionInfo
         }
 
         /// <summary>
-        /// Sets value of the user defined iProperty with given name.
+        /// Sets the value of a user defined iProperty.
         /// </summary>
-        /// <param name="name">The iProperty name.</param>
+        /// <param name="name">The user defined iProperty name.</param>
         /// <param name="value">The iProperty value.</param>
         public void UserDefined(string name, object value)
         {

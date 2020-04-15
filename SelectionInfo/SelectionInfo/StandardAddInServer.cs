@@ -45,6 +45,13 @@ namespace SelectionInfo
             }
         }
 
+        /// <summary>
+        /// Handle when a document is deactivated [deselected].
+        /// </summary>
+        /// <param name="DocumentObject"></param>
+        /// <param name="BeforeOrAfter"></param>
+        /// <param name="Context"></param>
+        /// <param name="HandlingCode"></param>
         private void ApplicationEvents_OnDeactivateDocument(_Document DocumentObject, EventTimingEnum BeforeOrAfter,
             NameValueMap Context, out HandlingCodeEnum HandlingCode)
         {
@@ -55,6 +62,15 @@ namespace SelectionInfo
             SelectedObject = null;
         }
 
+        /// <summary>
+        /// Handle when a document is selected by the user.
+        /// </summary>
+        /// <param name="JustSelectedEntities"></param>
+        /// <param name="MoreSelectedEntities"></param>
+        /// <param name="SelectionDevice"></param>
+        /// <param name="ModelPosition"></param>
+        /// <param name="ViewPosition"></param>
+        /// <param name="View"></param>
         private void UserInputEvents_OnSelect(ObjectsEnumerator JustSelectedEntities,
             ref ObjectCollection MoreSelectedEntities, SelectionDeviceEnum SelectionDevice, Point ModelPosition,
             Point2d ViewPosition, Inventor.View View)

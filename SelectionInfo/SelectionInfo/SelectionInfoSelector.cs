@@ -5,16 +5,16 @@ using Inventor;
 namespace SelectionInfo
 {
     /// <summary>
-    /// This class is responible for converting selected object to
-    /// <para>object displayed in PropertyGrid</para>
+    /// This class is responsible for taking the user-selected object and choosing
+    /// an appropriate object to display in the SelectionInfo palette's PropertyGrid.
     /// </summary>
     static class SelectionInfoSelector
     {
         /// <summary>
         /// Gets the object which contains information about <paramref name="selectedEntity"/>.
         /// </summary>
-        /// <param name="selectedEntity">The selected entity.</param>
-        /// <returns>Returns object with inforamtions about <paramref name="selectedEntity"/> when possible. Otherwise returns null.</returns>
+        /// <param name="selectedEntity">The user-selected entity.</param>
+        /// <returns>Returns an object with iProperty information about <paramref name="selectedEntity"/> (when possible). Otherwise returns null.</returns>
         public static object GetSelectionInfo(object selectedEntity)
         {
             switch (selectedEntity)
