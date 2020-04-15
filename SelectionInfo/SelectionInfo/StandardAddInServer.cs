@@ -2,7 +2,6 @@ using System;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using Inventor;
-using Microsoft.Win32;
 
 namespace SelectionInfo
 {
@@ -12,7 +11,7 @@ namespace SelectionInfo
     /// the AddIn is via the methods on this interface.
     /// </summary>
     [GuidAttribute("25119a9c-3557-4ed2-9bec-e184a99835f3")]
-    public class StandardAddInServer : Inventor.ApplicationAddInServer
+    public class StandardAddInServer : ApplicationAddInServer
     {
         private ApplicationEvents applicationEvents;
         private string ClientId = "{25119A9C-3557-4ED2-9BEC-E184A99835F3}";
@@ -23,7 +22,6 @@ namespace SelectionInfo
         private DockableWindow selectionInfoWnd;
         private PropertyGrid selectionPropertyGrid;
         private UserInputEvents userInputEvents;
-
 
         public StandardAddInServer()
         {
@@ -46,12 +44,89 @@ namespace SelectionInfo
         }
 
         /// <summary>
-        /// Handle when a document is deactivated [deselected].
+        /// Shows the ActiveDocument in the propertyGrid.
         /// </summary>
-        /// <param name="DocumentObject"></param>
-        /// <param name="BeforeOrAfter"></param>
-        /// <param name="Context"></param>
-        /// <param name="HandlingCode"></param>
+        private void ShowActiveDocument()
+        {
+            var entity = new DocumentInfo(inventor.ActiveDocument);
+            SelectedObject = entity;
+        }
+
+        /// <summary>
+        /// Clear the propertyGrid.
+        /// </summary>
+        private void ClearPalette()
+        {
+            SelectedObject = null;
+        }
+
+        /// <summary>
+        /// Shows the sent object in the propertyGrid, provided it is a valid [document type] entity.
+        /// </summary>
+        /// <param name="entity">Selected object.</param>
+        private void ShowEntity(object entity)
+        {
+            entity = SelectionInfoSelector.GetSelectionInfo(entity);
+            if (entity != null)
+            {
+                SelectedObject = entity;
+            }
+
+            {
+                //Leave unchanged
+            }
+        }
+
+        /// <summary>
+        /// Show the selected objects (if any) in the propertyGrid.
+        /// </summary>
+        private void ShowSelected()
+        {
+            var selectSet = inventor.ActiveDocument.SelectSet;
+
+            switch (selectSet.Count)
+            {
+                
+                case 0:
+                {
+                    ShowActiveDocument();
+                    break;
+                }
+
+                case 1:
+                {
+                    var entity = selectSet[1];
+                    ShowEntity(entity);
+                    break;
+                }
+
+                default:
+                {
+                    ClearPalette();
+                    break;
+                }
+            }
+
+        }
+
+
+
+        /// <summary>
+        /// Handle when a document is activated [opened].
+        /// </summary>
+        private void ApplicationEvents_OnActivateDocument(_Document DocumentObject, EventTimingEnum BeforeOrAfter,
+            NameValueMap Context, out HandlingCodeEnum HandlingCode)
+        {
+            HandlingCode = HandlingCodeEnum.kEventNotHandled;
+
+            ShowSelected();
+        }
+
+
+        /// <summary>
+        ///Handle when the current document is deactivated [closed].
+        /// </summary>
+
         private void ApplicationEvents_OnDeactivateDocument(_Document DocumentObject, EventTimingEnum BeforeOrAfter,
             NameValueMap Context, out HandlingCodeEnum HandlingCode)
         {
@@ -59,11 +134,14 @@ namespace SelectionInfo
             if (BeforeOrAfter != EventTimingEnum.kBefore)
                 return;
 
-            SelectedObject = null;
+            ClearPalette();
         }
 
+
+
+
         /// <summary>
-        /// Handle when a document is selected by the user.
+        /// Handle user-selections, choose best course based on how many objects are selected.
         /// </summary>
         /// <param name="JustSelectedEntities"></param>
         /// <param name="MoreSelectedEntities"></param>
@@ -75,23 +153,50 @@ namespace SelectionInfo
             ref ObjectCollection MoreSelectedEntities, SelectionDeviceEnum SelectionDevice, Point ModelPosition,
             Point2d ViewPosition, Inventor.View View)
         {
-            if (JustSelectedEntities.Count > 0)
-            {
-                var selectedEntity = JustSelectedEntities[1];
-                selectedEntity = SelectionInfoSelector.GetSelectionInfo(selectedEntity);
+            ShowSelected();
+        }
 
-                SelectedObject = selectedEntity;
+        /// <summary>
+        /// Handle when the active document changes.
+        /// </summary>
+        private void ApplicationEvents_OnDocumentChange(_Document DocumentObject,
+            EventTimingEnum BeforeOrAfter, CommandTypesEnum ReasonsForChange,
+            NameValueMap Context, out HandlingCodeEnum HandlingCode)
+        {
+            HandlingCode = HandlingCodeEnum.kEventNotHandled;
+            if (BeforeOrAfter != EventTimingEnum.kBefore)
+                return;
+
+            if (inventor.ActiveDocumentType == DocumentTypeEnum.kNoDocument)
+            {
+                ClearPalette();
             }
+            else
+            {
+                ShowSelected();
+            }
+
+        }
+
+        /// <summary>
+        /// Handle when user deselects an item.
+        /// </summary>
+         private void UserInputEvents_OnUnSelect(ObjectsEnumerator UnSelectedEntities, SelectionDeviceEnum SelectionDevice, Point ModelPosition, Point2d ViewPosition, Inventor.View View)
+        {
+            ShowSelected();
         }
 
         #region ApplicationAddInServer Members
 
-        public void Activate(Inventor.ApplicationAddInSite addInSiteObject, bool firstTime)
+        /// <summary>
+        ///This method is called by Inventor when it loads the AddIn.
+        /// The AddInSiteObject provides access to the Inventor Application object.
+        /// The FirstTime flag indicates if the AddIn is loaded for the first time.
+        /// </summary>
+        /// <param name="addInSiteObject"></param>
+        /// <param name="firstTime"></param>
+        public void Activate(ApplicationAddInSite addInSiteObject, bool firstTime)
         {
-            // This method is called by Inventor when it loads the addin.
-            // The AddInSiteObject provides access to the Inventor Application object.
-            // The FirstTime flag indicates if the addin is loaded for the first time.
-
             // Initialize AddIn members.
             inventor = addInSiteObject.Application;
 
@@ -100,7 +205,7 @@ namespace SelectionInfo
                 "SelectionInfo.StandardAddInServer.selectionInfoWnd", "Selection");
             selectionInfoWnd.ShowVisibilityCheckBox = true;
 
-            //Create propertyGrig control
+            //Create propertyGrid control
             selectionPropertyGrid = new PropertyGrid();
 
             //Add propertyGrid to dockable window
@@ -109,20 +214,27 @@ namespace SelectionInfo
             //Setup event handlers
             userInputEvents = inventor.CommandManager.UserInputEvents;
             userInputEvents.OnSelect += UserInputEvents_OnSelect;
+            userInputEvents.OnUnSelect += UserInputEvents_OnUnSelect;
 
             applicationEvents = inventor.ApplicationEvents;
+            applicationEvents.OnActivateDocument += ApplicationEvents_OnActivateDocument;
             applicationEvents.OnDeactivateDocument += ApplicationEvents_OnDeactivateDocument;
+            applicationEvents.OnDocumentChange += ApplicationEvents_OnDocumentChange;
         }
 
+        /// <summary>
+        /// This method is called by Inventor when the AddIn in unloaded.
+        /// The AddIn will be unloaded either manually by the user or
+        /// when the Inventor session is terminated.
+        /// </summary>
         public void Deactivate()
         {
-            // This method is called by Inventor when the AddIn is unloaded.
-            // The AddIn will be unloaded either manually by the user or
-            // when the Inventor session is terminated
-
             //Remove event handlers
             userInputEvents.OnSelect -= UserInputEvents_OnSelect;
+            userInputEvents.OnUnSelect -= UserInputEvents_OnUnSelect;
+            applicationEvents.OnActivateDocument -= ApplicationEvents_OnActivateDocument;
             applicationEvents.OnDeactivateDocument -= ApplicationEvents_OnDeactivateDocument;
+            applicationEvents.OnDocumentChange -= ApplicationEvents_OnDocumentChange;
 
             //Cleanup selectionPropertyGrid
             SelectedObject = null;
